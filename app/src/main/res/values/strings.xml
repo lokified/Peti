@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Peti</string>
+    <string name="snack_error">Something went wrong</string>
+    <string name="loading">Loading …</string>
+    <string name="register_success">Registration Successful</string>
+    <string name="login_success">Login Successful</string>
+</resources>
