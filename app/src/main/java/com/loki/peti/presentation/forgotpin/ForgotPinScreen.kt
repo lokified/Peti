@@ -7,6 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dsc.form_builder.TextFieldState
@@ -46,7 +47,7 @@ fun FormSection(
     val newPassword = formState.getState<TextFieldState>("new_password")
     val conPassword = formState.getState<TextFieldState>("con_password")
 
-    val isPasswordMatch = newPassword === conPassword
+    val isPasswordMatch = newPassword.value === conPassword.value
 
     Box(modifier = modifier.fillMaxWidth()) {
 
@@ -68,7 +69,8 @@ fun FormSection(
                 onValueChange = { newPassword.change(it) },
                 errorMessage = newPassword.errorMessage,
                 isError = newPassword.hasError,
-                modifier = Modifier.padding(vertical = 4.dp)
+                modifier = Modifier.padding(vertical = 4.dp),
+                keyboardType = KeyboardType.Password
             )
 
             Input(
@@ -78,7 +80,8 @@ fun FormSection(
                 onValueChange = { conPassword.change(it) },
                 errorMessage = if (!isPasswordMatch) "Password does not match" else conPassword.errorMessage,
                 isError = conPassword.hasError && !isPasswordMatch,
-                modifier = Modifier.padding(vertical = 4.dp)
+                modifier = Modifier.padding(vertical = 4.dp),
+                keyboardType = KeyboardType.Password
             )
 
             ButtonSection(

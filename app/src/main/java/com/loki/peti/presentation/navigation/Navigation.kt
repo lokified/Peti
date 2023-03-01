@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import com.loki.peti.presentation.PetiAppState
 import com.loki.peti.presentation.forgotpin.ForgotPinScreen
 import com.loki.peti.presentation.login.LoginScreen
+import com.loki.peti.presentation.register.RegisterScreen
 
 @Composable
 fun Navigation(appState: PetiAppState) {
@@ -30,6 +31,15 @@ fun Navigation(appState: PetiAppState) {
             ForgotPinScreen(
                 popUp = {
                     appState.popUp()
+                }
+            )
+        }
+
+        composable(route = Screens.RegisterScreen.route) {
+
+            RegisterScreen(
+                openScreen = { route ->
+                    appState.navigate(route)
                 }
             )
         }
