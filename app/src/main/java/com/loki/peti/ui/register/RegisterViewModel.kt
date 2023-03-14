@@ -1,10 +1,10 @@
-package com.loki.peti.presentation.register
+package com.loki.peti.ui.register
 
 import com.dsc.form_builder.FormState
 import com.dsc.form_builder.TextFieldState
 import com.dsc.form_builder.Validators
-import com.loki.peti.presentation.PetiAppViewModel
-import com.loki.peti.presentation.navigation.Screens
+import com.loki.peti.ui.PetiAppViewModel
+import com.loki.peti.ui.navigation.OnBoardingScreens
 
 class RegisterViewModel: PetiAppViewModel() {
 
@@ -54,7 +54,7 @@ class RegisterViewModel: PetiAppViewModel() {
     ) {
 
         launchCatching {
-            openScreen(Screens.LoginScreen.route)
+            openScreen(OnBoardingScreens.LoginScreen.route)
         }
     }
 }

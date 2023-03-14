@@ -1,4 +1,4 @@
-package com.loki.peti.presentation.forgotpin
+package com.loki.peti.ui.forgotpin
 
 
 import androidx.compose.foundation.layout.*
@@ -11,9 +11,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dsc.form_builder.TextFieldState
-import com.loki.peti.presentation.common.ButtonSection
-import com.loki.peti.presentation.common.Input
-import com.loki.peti.presentation.common.TopBar
+import com.loki.peti.ui.common.ButtonSection
+import com.loki.peti.ui.common.Input
+import com.loki.peti.ui.common.TopBar
 
 @Composable
 fun ForgotPinScreen(

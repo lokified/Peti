@@ -1,5 +1,6 @@
-package com.loki.peti.presentation.common
+package com.loki.peti.ui.common
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -10,9 +11,11 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -77,6 +80,65 @@ fun Input(
 
 }
 
+
+@Composable
+fun BasicInput(
+    modifier: Modifier = Modifier,
+    placeholder: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    errorMessage: String = "",
+    isError: Boolean = false,
+    isIconVisible: Boolean = false,
+    trailingIcon: ImageVector,
+    onIconClicked: () -> Unit = {}
+) {
+
+    Column {
+        TextField(
+            value = value,
+            onValueChange = {
+                onValueChange(it)
+            },
+            isError = isError,
+            placeholder = {
+                Text(text = placeholder, textAlign = TextAlign.Center)
+            },
+            modifier = modifier
+                .fillMaxWidth(),
+            colors = TextFieldDefaults.textFieldColors(
+                unfocusedIndicatorColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                errorIndicatorColor = Color.Transparent,
+                placeholderColor = Color.LightGray
+            ),
+            trailingIcon = {
+                if (isIconVisible) {
+                    IconButton(
+                        onClick = {
+                            onIconClicked()
+                        }
+                    ) {
+                        Icon(
+                            imageVector = trailingIcon,
+                            contentDescription = null,
+                            tint = Color.Gray
+                        )
+                    }
+                }
+            },
+        )
+
+        if (isError) {
+            Text(
+                text = errorMessage,
+                color = MaterialTheme.colors.error,
+                fontSize = 12.sp
+            )
+        }
+    }
+}
+
 @Composable
 fun textFieldColors(): TextFieldColors {
     return TextFieldDefaults.textFieldColors(
@@ -84,6 +146,7 @@ fun textFieldColors(): TextFieldColors {
         focusedLabelColor = MaterialTheme.colors.primary,
         focusedIndicatorColor = MaterialTheme.colors.primary,
         unfocusedLabelColor = MaterialTheme.colors.onBackground,
-        unfocusedIndicatorColor = MaterialTheme.colors.onBackground
+        unfocusedIndicatorColor = MaterialTheme.colors.onBackground,
+        placeholderColor = Color.Gray
     )
 }

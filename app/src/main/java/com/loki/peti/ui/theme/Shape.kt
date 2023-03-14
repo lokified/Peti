@@ -1,4 +1,4 @@
-package com.loki.peti.presentation.theme
+package com.loki.peti.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

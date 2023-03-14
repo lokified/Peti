@@ -1,10 +1,10 @@
-package com.loki.peti.presentation.login
+package com.loki.peti.ui.login
 
 import com.dsc.form_builder.FormState
 import com.dsc.form_builder.TextFieldState
 import com.dsc.form_builder.Validators
-import com.loki.peti.presentation.PetiAppViewModel
-import com.loki.peti.presentation.navigation.Screens
+import com.loki.peti.ui.PetiAppViewModel
+import com.loki.peti.ui.navigation.OnBoardingScreens
 
 class LoginViewModel: PetiAppViewModel() {
 
@@ -37,8 +37,8 @@ class LoginViewModel: PetiAppViewModel() {
         launchCatching {
 
             openAndPopUp(
-                Screens.HomeScreen.route,
-                Screens.LoginScreen.route
+                OnBoardingScreens.ProfileSetup1Screen.route,
+                OnBoardingScreens.LoginScreen.route
             )
         }
     }

@@ -1,4 +1,4 @@
-package com.loki.peti.presentation.theme
+package com.loki.peti.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

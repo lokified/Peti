@@ -1,4 +1,4 @@
-package com.loki.peti.presentation.theme
+package com.loki.peti.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -9,3 +9,6 @@ val Teal200 = Color(0xFF03DAC5)
 
 val Teal_Light = Color(0XFF0FDEFA)
 val Yellow_Light = Color(0XFFFFB118)
+val Green_Light = Color(0XFF60CE65)
+val Teal_100 = Color(0xFFF6F9FA)
+val Teal_500 = Color(0xFFD1EBEE)

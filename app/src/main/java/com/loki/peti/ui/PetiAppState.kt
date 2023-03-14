@@ -1,4 +1,4 @@
-package com.loki.peti.presentation
+package com.loki.peti.ui
 
 import android.content.res.Resources
 import androidx.compose.material.ScaffoldState

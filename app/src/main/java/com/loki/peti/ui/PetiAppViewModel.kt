@@ -1,4 +1,4 @@
-package com.loki.peti.presentation
+package com.loki.peti.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

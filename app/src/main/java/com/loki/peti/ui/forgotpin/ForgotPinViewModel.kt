@@ -1,10 +1,9 @@
-package com.loki.peti.presentation.forgotpin
+package com.loki.peti.ui.forgotpin
 
 import com.dsc.form_builder.FormState
 import com.dsc.form_builder.TextFieldState
 import com.dsc.form_builder.Validators
-import com.loki.peti.presentation.PetiAppViewModel
-import com.loki.peti.presentation.navigation.Screens
+import com.loki.peti.ui.PetiAppViewModel
 
 class ForgotPinViewModel: PetiAppViewModel() {
 
