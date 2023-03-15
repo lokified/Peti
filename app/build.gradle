@@ -105,4 +105,7 @@ dependencies {
 
     //form builder
     implementation "com.github.jkuatdsc:form-builder:1.0.3"
+
+    //datastore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 }

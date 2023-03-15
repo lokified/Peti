@@ -272,6 +272,7 @@ fun ProfileSetup2Screen(
                             trailingIcon = Icons.Default.DateRange,
                             modifier = Modifier.padding(vertical = 8.dp)
                         ) {
+                            keyboardController?.hide()
                             picker.show()
                         }
 
