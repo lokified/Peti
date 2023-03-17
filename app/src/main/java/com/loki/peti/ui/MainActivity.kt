@@ -1,20 +1,20 @@
 package com.loki.peti.ui
 
 import android.content.res.Resources
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.loki.peti.ui.common.BottomNav
 import com.loki.peti.ui.navigation.Navigation
 import com.loki.peti.ui.theme.PetiTheme
 import com.loki.peti.util.SnackbarManager
@@ -23,6 +23,7 @@ import kotlinx.coroutines.CoroutineScope
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,7 +47,13 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                     },
-                    scaffoldState = appState.scaffoldState
+                    scaffoldState = appState.scaffoldState,
+                    bottomBar = {
+                        BottomNav(
+                            navController = appState.navController,
+                            onItemClick = { appState.clearAndNavigate(it.route) }
+                        )
+                    }
                 ) { padding ->
 
                     Navigation(appState = appState)

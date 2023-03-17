@@ -24,6 +24,7 @@ import com.loki.peti.R
 import com.loki.peti.domain.models.Pet
 import com.loki.peti.ui.common.ButtonSection
 import com.loki.peti.ui.common.TopBar
+import com.loki.peti.ui.navigation.HomeScreens
 import com.loki.peti.ui.navigation.OnBoardingScreens
 import com.loki.peti.ui.theme.Teal_100
 import com.loki.peti.util.extensions.toBitmap
@@ -40,7 +41,7 @@ fun ProfileSetup4Screen(
         title = "Profile Summary",
         bottomBar = {
             ButtonSection(text = "Save Profile", modifier = Modifier.padding(16.dp)) {
-                clearAndOpen(OnBoardingScreens.HomeScreen.route)
+                clearAndOpen(HomeScreens.HomeScreen.route)
             }
         }
     ) {

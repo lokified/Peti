@@ -90,7 +90,7 @@ fun BasicInput(
     errorMessage: String = "",
     isError: Boolean = false,
     isIconVisible: Boolean = false,
-    trailingIcon: ImageVector,
+    trailingIcon: ImageVector? = null,
     onIconClicked: () -> Unit = {}
 ) {
 
@@ -120,7 +120,7 @@ fun BasicInput(
                         }
                     ) {
                         Icon(
-                            imageVector = trailingIcon,
+                            imageVector = trailingIcon!!,
                             contentDescription = null,
                             tint = Color.Gray
                         )
