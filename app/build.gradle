@@ -64,6 +64,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 
+    //icons
     implementation "androidx.compose.material:material-icons-extended:$compose_ui_version"
 
     //room
@@ -84,10 +85,12 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // Compose dependencies
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0-beta01"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0"
     implementation "androidx.navigation:navigation-compose:2.5.3"
-    implementation "androidx.compose.material:material-icons-extended:$compose_ui_version"
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+
+    //livedata
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_ui_version"
 
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.44"

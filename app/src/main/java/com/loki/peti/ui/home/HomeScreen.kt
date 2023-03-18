@@ -28,7 +28,8 @@ import com.loki.peti.ui.theme.Teal_100
 
 @Composable
 fun HomeScreen(
-    openScreen: (String) -> Unit
+    openScreen: (String) -> Unit,
+    titleClicked: (String) -> Unit
 ) {
 
     TopBar(title = "Home") {
@@ -42,6 +43,7 @@ fun HomeScreen(
                     modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)
                 ) {
                     openScreen(item.route)
+                    titleClicked(item.title)
                 }
             }
         }
@@ -112,31 +114,31 @@ val categoryItems = listOf(
     CategoryItem(
         image = R.drawable.food,
         title = "Food",
-        route = HomeScreens.FoodScreen.route,
+        route = HomeScreens.HomeDetailScreen.route,
         categoryItem = listOf("2 Bowls of fish")
     ),
     CategoryItem(
         image = R.drawable.expense,
         title = "Expense",
-        route = HomeScreens.ExpenseScreen.route,
+        route = HomeScreens.HomeDetailScreen.route,
         categoryItem = listOf("Food")
     ),
     CategoryItem(
         image = R.drawable.sanitation,
         title = "Hygiene and Care",
-        route = HomeScreens.HygieneScreen.route,
+        route = HomeScreens.HomeDetailScreen.route,
         categoryItem = emptyList()
     ),
     CategoryItem(
         image = R.drawable.exercise,
         title = "Activities",
-        route = HomeScreens.ActivityScreen.route,
+        route = HomeScreens.HomeDetailScreen.route,
         categoryItem = listOf("Training", "Exercise")
     ),
     CategoryItem(
         image = R.drawable.vaccine,
         title = "Vaccine",
-        route = HomeScreens.VaccineScreen.route,
+        route = HomeScreens.HomeDetailScreen.route,
         categoryItem = listOf("Rabies Vaccine")
     )
 )

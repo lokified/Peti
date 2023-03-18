@@ -2,19 +2,26 @@ package com.loki.peti.ui.navigation
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.loki.peti.ui.PetiAppState
 import com.loki.peti.ui.add.AddScreen
+import com.loki.peti.ui.addActivities.AddActivitiesScreen
+import com.loki.peti.ui.addExpense.AddExpenseScreen
+import com.loki.peti.ui.addFood.AddFoodScreen
+import com.loki.peti.ui.addHygiene.AddHygieneScreen
+import com.loki.peti.ui.addNewSubCategory.AddNewSubCategoryScreen
+import com.loki.peti.ui.addVaccine.AddVaccineScreen
 import com.loki.peti.ui.createProfile.ProfileSetup1Screen
 import com.loki.peti.ui.createProfile.ProfileSetup2Screen
 import com.loki.peti.ui.createProfile.ProfileSetup3Screen
 import com.loki.peti.ui.createProfile.ProfileSetup4Screen
 import com.loki.peti.ui.forgotpin.ForgotPinScreen
 import com.loki.peti.ui.home.HomeScreen
+import com.loki.peti.ui.homeDetail.HomeDetailScreen
 import com.loki.peti.ui.login.LoginScreen
 import com.loki.peti.ui.profile.ProfileScreen
 import com.loki.peti.ui.register.RegisterScreen
@@ -116,11 +123,16 @@ fun NavGraphBuilder.homeScreenNavGraph(
         startDestination = HomeScreens.HomeScreen.route
     ) {
 
+        val title = mutableStateOf("")
+
         composable(route = HomeScreens.HomeScreen.route) {
 
-            HomeScreen { route ->
+            HomeScreen (
+                openScreen = { route ->
                     appState.navigate(route)
-            }
+                },
+                titleClicked = { title.value = it }
+            )
         }
 
         composable(route = HomeScreens.AddScreen.route) {
@@ -133,24 +145,56 @@ fun NavGraphBuilder.homeScreenNavGraph(
             ProfileScreen()
         }
 
-        composable(route = HomeScreens.ExpenseScreen.route) {
+        composable(route = HomeScreens.HomeDetailScreen.route) {
 
+            HomeDetailScreen(
+                topBarTitle = title.value,
+                openScreen = { route ->
+                    appState.navigate(route)
+                }
+            )
         }
 
-        composable(route = HomeScreens.FoodScreen.route) {
+        composable(route = HomeScreens.AddVaccineScreen.route) {
 
+            AddVaccineScreen(topBarTitle = title.value) {
+                appState.popUp()
+            }
         }
 
-        composable(route = HomeScreens.HygieneScreen.route) {
+        composable(route = HomeScreens.AddFoodScreen.route) {
 
+            AddFoodScreen(topBarTitle = title.value) {
+                appState.popUp()
+            }
         }
 
-        composable(route = HomeScreens.ActivityScreen.route) {
+        composable(route = HomeScreens.AddHygieneScreen.route) {
 
+            AddHygieneScreen(topBarTitle = title.value) {
+                appState.popUp()
+            }
         }
 
-        composable(route = HomeScreens.VaccineScreen.route) {
+        composable(route = HomeScreens.AddActivityScreen.route) {
 
+            AddActivitiesScreen(topBarTitle = title.value) {
+                appState.popUp()
+            }
+        }
+
+        composable(route = HomeScreens.AddExpenseScreen.route) {
+
+            AddExpenseScreen(topBarTitle = title.value) {
+                appState.popUp()
+            }
+        }
+
+        composable(route = HomeScreens.AddNewCategoryScreen.route) {
+
+            AddNewSubCategoryScreen(topBarTitle = title.value) {
+                appState.popUp()
+            }
         }
     }
 }
@@ -160,9 +204,11 @@ sealed class HomeScreens(val route: String) {
     object HomeScreen: HomeScreens("home_screen")
     object AddScreen: HomeScreens("add_screen")
     object ProfileScreen: HomeScreens("profile_screen")
-    object FoodScreen: HomeScreens("Food_screen")
-    object ExpenseScreen: HomeScreens("Food_screen")
-    object VaccineScreen: HomeScreens("Food_screen")
-    object HygieneScreen: HomeScreens("Food_screen")
-    object ActivityScreen: HomeScreens("Food_screen")
+    object HomeDetailScreen: HomeScreens("Home_Detail_screen")
+    object AddVaccineScreen: HomeScreens("Add_Vaccine_screen")
+    object AddExpenseScreen: HomeScreens("Add_Expense_screen")
+    object AddHygieneScreen: HomeScreens("Add_Hygiene_screen")
+    object AddFoodScreen: HomeScreens("Add_Food_screen")
+    object AddActivityScreen: HomeScreens("Add_Activity_screen")
+    object AddNewCategoryScreen: HomeScreens("Add_new_category_screen")
 }

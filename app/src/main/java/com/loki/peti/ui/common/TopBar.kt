@@ -1,5 +1,6 @@
 package com.loki.peti.ui.common
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme
@@ -13,10 +14,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun TopBar(
     title: String,
     bottomBar: @Composable () -> Unit = {},
+    floatingButton: @Composable () -> Unit = {},
     content: @Composable () -> Unit
 ) {
 
@@ -41,8 +44,11 @@ fun TopBar(
         },
         bottomBar = {
             bottomBar()
+        },
+        floatingActionButton = {
+            floatingButton()
         }
-    ){ padding ->
+    ){
             content()
     }
 }
