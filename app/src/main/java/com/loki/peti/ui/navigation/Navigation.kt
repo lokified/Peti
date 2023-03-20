@@ -157,37 +157,42 @@ fun NavGraphBuilder.homeScreenNavGraph(
 
         composable(route = HomeScreens.AddVaccineScreen.route) {
 
-            AddVaccineScreen(topBarTitle = title.value) {
-                appState.popUp()
-            }
+            AddVaccineScreen(
+                topBarTitle = title.value,
+                popUp =  { appState.popUp() }
+            )
         }
 
         composable(route = HomeScreens.AddFoodScreen.route) {
 
-            AddFoodScreen(topBarTitle = title.value) {
-                appState.popUp()
-            }
+            AddFoodScreen(
+                topBarTitle = title.value,
+                popUp = { appState.popUp() }
+            )
         }
 
         composable(route = HomeScreens.AddHygieneScreen.route) {
 
-            AddHygieneScreen(topBarTitle = title.value) {
-                appState.popUp()
-            }
+            AddHygieneScreen(
+                topBarTitle = title.value,
+                popUp = { appState.popUp() }
+            )
         }
 
         composable(route = HomeScreens.AddActivityScreen.route) {
 
-            AddActivitiesScreen(topBarTitle = title.value) {
-                appState.popUp()
-            }
+            AddActivitiesScreen(
+                topBarTitle = title.value,
+                popUp = { appState.popUp() }
+            )
         }
 
         composable(route = HomeScreens.AddExpenseScreen.route) {
 
-            AddExpenseScreen(topBarTitle = title.value) {
-                appState.popUp()
-            }
+            AddExpenseScreen(
+                topBarTitle = title.value,
+                popUp = { appState.popUp() }
+            )
         }
 
         composable(route = HomeScreens.AddNewCategoryScreen.route) {

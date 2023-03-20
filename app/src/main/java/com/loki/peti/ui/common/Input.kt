@@ -1,15 +1,18 @@
 package com.loki.peti.ui.common
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Animation
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.KeyboardType
@@ -18,6 +21,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.loki.peti.ui.theme.Teal_100
 
 
 @Composable
@@ -136,6 +140,57 @@ fun BasicInput(
                 fontSize = 12.sp
             )
         }
+    }
+}
+
+
+@Composable
+fun TransparentInput(
+    modifier: Modifier = Modifier,
+    placeholder: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    errorMessage: String = "",
+    isError: Boolean = false,
+    isIconVisible: Boolean = false,
+    trailingIcon: ImageVector? = null,
+    onIconClicked: () -> Unit = {}
+) {
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(55.dp)
+            .background(color = Teal_100, shape = RoundedCornerShape(5.dp))
+    ) {
+
+
+        BasicInput(
+            placeholder = placeholder,
+            value = value,
+            onValueChange = onValueChange,
+            trailingIcon = trailingIcon,
+            onIconClicked = onIconClicked,
+            errorMessage = errorMessage,
+            isError = isError,
+            isIconVisible = isIconVisible,
+        )
+
+        if (isIconVisible) {
+            Box(
+                modifier = Modifier.matchParentSize()
+                    .alpha(0f)
+                    .clickable { onIconClicked() }
+            )
+        }
+    }
+
+    if (isError) {
+        Text(
+            text = errorMessage,
+            color = MaterialTheme.colors.error,
+            fontSize = 12.sp
+        )
     }
 }
 

@@ -23,7 +23,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
@@ -40,10 +39,10 @@ import androidx.core.app.ActivityCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dsc.form_builder.TextFieldState
 import com.loki.peti.R
-import com.loki.peti.ui.common.BasicInput
 import com.loki.peti.ui.common.ButtonSection
 import com.loki.peti.ui.common.TopBar
-import com.loki.peti.ui.theme.Teal_100
+import com.loki.peti.ui.common.TransparentInput
+import com.loki.peti.ui.common.datePickerLayout
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -239,30 +238,20 @@ fun ProfileSetup2Screen(
                 ) {
 
                     Column {
-                        TextFieldRow(
+
+                        TransparentInput(
+                            modifier = Modifier.padding(vertical = 8.dp),
                             placeholder = "Enter Pet name",
                             value = petName.value,
                             onValueChange = { petName.change(it) },
                             errorMessage = petName.errorMessage,
-                            isError = petName.hasError,
-                            modifier = Modifier.padding(vertical = 8.dp)
+                            isError = petName.hasError
                         )
 
-                        val mCalendar = Calendar.getInstance()
-                        val year = mCalendar.get(Calendar.YEAR)
-                        val month = mCalendar.get(Calendar.MONTH)
-                        val day = mCalendar.get(Calendar.DAY_OF_MONTH)
+                        val picker = datePickerLayout(context, { birthday.change(it) })
 
-                        mCalendar.time = Date()
-
-                        val picker = DatePickerDialog(
-                            context,
-                            {_: DatePicker, mYear: Int, mMonth: Int, mDay: Int ->
-                                birthday.change("$mDay/${mMonth + 1}/$mYear")
-                            }, year, month, day
-                        )
-
-                        TextFieldRow(
+                        TransparentInput(
+                            modifier = Modifier.padding(vertical = 8.dp),
                             placeholder = "Enter Birth date",
                             value = birthday.value,
                             onValueChange = { birthday.change(it) },
@@ -270,75 +259,22 @@ fun ProfileSetup2Screen(
                             isError = birthday.hasError,
                             isIconVisible = true,
                             trailingIcon = Icons.Default.DateRange,
-                            modifier = Modifier.padding(vertical = 8.dp)
                         ) {
                             keyboardController?.hide()
                             picker.show()
                         }
 
-                        TextFieldRow(
+                        TransparentInput(
+                            modifier = Modifier.padding(vertical = 8.dp),
                             placeholder = "Enter gender",
                             value = gender.value,
                             onValueChange = { gender.change(it) },
                             errorMessage = gender.errorMessage,
-                            isError = gender.hasError,
-                            modifier = Modifier.padding(vertical = 8.dp)
+                            isError = gender.hasError
                         )
                     }
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun TextFieldRow(
-    modifier: Modifier = Modifier,
-    placeholder: String,
-    value: String,
-    onValueChange: (String) -> Unit,
-    errorMessage: String = "",
-    isError: Boolean = false,
-    isIconVisible: Boolean = false,
-    trailingIcon: ImageVector = Icons.Default.Animation,
-    onIconClicked: () -> Unit = {}
-) {
-
-    Column {
-        Box(
-            modifier = modifier
-                .fillMaxWidth()
-                .height(55.dp)
-                .background(color = Teal_100, shape = RoundedCornerShape(5.dp))
-        ) {
-
-
-            BasicInput(
-                placeholder = placeholder,
-                value = value,
-                onValueChange = onValueChange,
-                trailingIcon = trailingIcon,
-                onIconClicked = onIconClicked,
-                errorMessage = errorMessage,
-                isError = isError,
-                isIconVisible = isIconVisible,
-            )
-
-            if (isIconVisible) {
-                Box(
-                    modifier = Modifier.matchParentSize()
-                        .alpha(0f)
-                        .clickable { onIconClicked() }
-                )
-            }
-        }
-
-        if (isError) {
-            Text(
-                text = errorMessage,
-                color = MaterialTheme.colors.error,
-                fontSize = 12.sp
-            )
         }
     }
 }

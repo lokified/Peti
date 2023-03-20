@@ -1,6 +1,5 @@
 package com.loki.peti.ui.createProfile
 
-import android.app.TimePickerDialog
 import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -26,11 +25,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.loki.peti.ui.common.ButtonSection
 import com.loki.peti.ui.common.TopBar
+import com.loki.peti.ui.common.timePickerLayout
 import com.loki.peti.ui.navigation.OnBoardingScreens
 import com.loki.peti.ui.theme.Green_Light
 import com.loki.peti.ui.theme.Teal_100
 import com.loki.peti.ui.theme.Teal_500
-import java.util.*
 
 @Composable
 fun ProfileSetup3Screen(
@@ -142,16 +141,7 @@ fun FeedingTimeSection(
     viewModel: ProfileSetUpViewModel
 ) {
 
-    val mCalendar = Calendar.getInstance()
-    val mHour = mCalendar[Calendar.HOUR_OF_DAY]
-    val mMinute = mCalendar[Calendar.MINUTE]
-
-    val timePicker = TimePickerDialog(
-        context,
-        {_, hour : Int, minute: Int ->
-            viewModel.feedTime.value = "$hour:$minute"
-        }, mHour, mMinute, false
-    )
+    val timePicker = timePickerLayout(context) { viewModel.feedTime.value = it }
 
 
     Row(

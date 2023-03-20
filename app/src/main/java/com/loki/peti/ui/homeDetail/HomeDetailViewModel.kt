@@ -31,7 +31,7 @@ class HomeDetailViewModel: PetiAppViewModel() {
             "Vaccine" ->  HomeScreens.AddVaccineScreen.route
             "Activities" -> HomeScreens.AddActivityScreen.route
             "Food" -> HomeScreens.AddFoodScreen.route
-            "Hygiene And Care" -> HomeScreens.AddHygieneScreen.route
+            "Hygiene and Care" -> HomeScreens.AddHygieneScreen.route
             "Expense" -> HomeScreens.AddExpenseScreen.route
             else -> HomeScreens.AddNewCategoryScreen.route
         }
