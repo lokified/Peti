@@ -57,7 +57,8 @@ fun ProfileSetup3Screen(
 
         Column(modifier = Modifier) {
             TopSection(
-                Modifier.padding(top = 50.dp, start = 24.dp, end = 24.dp, bottom = 100.dp)
+                Modifier.padding(top = 50.dp, start = 24.dp, end = 24.dp, bottom = 100.dp),
+                viewModel = viewModel
             )
 
             FeedingTimeSection(
@@ -77,11 +78,10 @@ fun ProfileSetup3Screen(
 
 @Composable
 fun TopSection(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: ProfileSetUpViewModel
 ) {
 
-    var value by remember { mutableStateOf(0) }
-    
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -107,16 +107,19 @@ fun TopSection(
             ) {
 
                 ActionButton(
-                    color = Green_Light,
-                    icon = Icons.Rounded.Remove
+                    color = if(viewModel.feedTimeFrequency.value != 0 ) Green_Light else Color.Gray,
+                    icon = Icons.Rounded.Remove,
+                    isEnabled = viewModel.feedTimeFrequency.value != 0
                 ) {
-                    value--
+
+                    viewModel.feedTimeFrequency.value --
+                    viewModel.deleteRecentFeedTime()
                 }
 
                 Spacer(modifier = Modifier.width(12.dp))
 
                 Text(
-                    text = value.toString(),
+                    text = viewModel.feedTimeFrequency.value.toString(),
                     fontSize = 40.sp,
                     fontWeight = FontWeight.Bold
                 )
@@ -127,7 +130,8 @@ fun TopSection(
                     color = MaterialTheme.colors.error,
                     icon = Icons.Default.Add
                 ) {
-                    value++
+
+                    viewModel.feedTimeFrequency.value ++
                 }
             }
         }
@@ -159,10 +163,14 @@ fun FeedingTimeSection(
         Spacer(modifier = Modifier.weight(1f))
 
         ActionButton(
-            color = MaterialTheme.colors.primary,
-            icon = Icons.Default.Add
+            color = if (viewModel.isFeedFrequencyValid()) MaterialTheme.colors.primary else Color.Gray,
+            icon = Icons.Default.Add,
+            isEnabled = viewModel.isFeedFrequencyValid() && viewModel.isFeedListEqualFrequency()
         ) {
-            timePicker.show()
+
+            if(viewModel.isFeedListEqualFrequency()) {
+                timePicker.show()
+            }
         }
     }
 }
@@ -233,6 +241,7 @@ fun ActionButton(
     modifier: Modifier = Modifier,
     color: Color,
     icon: ImageVector,
+    isEnabled: Boolean = true,
     onClick: () -> Unit
 ) {
 
@@ -245,7 +254,8 @@ fun ActionButton(
     ) {
         IconButton(
             onClick = { onClick() },
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
+            enabled = isEnabled
         ) {
             Icon(
                 imageVector = icon,

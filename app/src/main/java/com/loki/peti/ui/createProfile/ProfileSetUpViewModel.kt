@@ -24,6 +24,8 @@ class ProfileSetUpViewModel @Inject constructor(
 
     val feedTime = mutableStateOf("")
 
+    val feedTimeFrequency = mutableStateOf(0)
+
     val petSummary = mutableStateOf<Pet>(Pet("", "", "", "", emptyList()))
 
     init {
@@ -74,6 +76,10 @@ class ProfileSetUpViewModel @Inject constructor(
         }
     }
 
+    fun isFeedFrequencyValid() = feedTimeFrequency.value != 0
+
+    fun isFeedListEqualFrequency() = feedingList.size <= feedTimeFrequency.value - 1
+
     fun addFeedTime(time: String) {
 
         feedingList.add(time)
@@ -90,7 +96,14 @@ class ProfileSetUpViewModel @Inject constructor(
     }
 
     fun deleteFeedTime(time: String) {
+        feedTimeFrequency.value--
         feedingList.remove(time)
+    }
+
+    fun deleteRecentFeedTime() {
+        if (feedingList.isNotEmpty()) {
+            feedingList.remove(feedingList[feedingList.size - 1])
+        }
     }
 
     private fun getPetProfileSummary() {
