@@ -15,7 +15,9 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dsc.form_builder.TextFieldState
+import com.loki.peti.domain.models.HomeDetail
 import com.loki.peti.ui.common.*
+import com.loki.peti.ui.tabs.HomeDetailTabsViewModel
 import java.util.*
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -23,7 +25,8 @@ import java.util.*
 fun AddFoodScreen(
     topBarTitle: String,
     popUp: () -> Unit,
-    viewModel: AddFoodViewModel = hiltViewModel()
+    viewModel: AddFoodViewModel = hiltViewModel(),
+    detailTabsViewModel: HomeDetailTabsViewModel = hiltViewModel()
 ) {
 
     val context = LocalContext.current
@@ -98,6 +101,13 @@ fun AddFoodScreen(
                     modifier = Modifier.padding(vertical = 16.dp)
                 ) {
                     if (formState.validate()) {
+                        detailTabsViewModel.addFood(
+                            HomeDetail(
+                                titleDescription = foodType.value,
+                                timeRecord = time.value,
+                                dateRecord = date.value
+                            )
+                        )
                         popUp()
                         keyboardController?.hide()
                     }

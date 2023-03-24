@@ -15,14 +15,17 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dsc.form_builder.TextFieldState
+import com.loki.peti.domain.models.HomeDetail
 import com.loki.peti.ui.common.*
+import com.loki.peti.ui.tabs.HomeDetailTabsViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AddHygieneScreen(
     topBarTitle: String,
     popUp: () -> Unit,
-    viewModel: AddHygieneViewModel  = hiltViewModel()
+    viewModel: AddHygieneViewModel  = hiltViewModel(),
+    detailTabsViewModel: HomeDetailTabsViewModel = hiltViewModel()
 ) {
 
     val context = LocalContext.current
@@ -97,6 +100,13 @@ fun AddHygieneScreen(
                     modifier = Modifier.padding(vertical = 16.dp)
                 ) {
                     if (formState.validate()) {
+                        detailTabsViewModel.addHygiene(
+                            HomeDetail(
+                                titleDescription = itemName.value,
+                                timeRecord = time.value,
+                                dateRecord = date.value
+                            )
+                        )
                         popUp()
                         keyboardController?.hide()
                     }

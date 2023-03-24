@@ -137,12 +137,16 @@ fun NavGraphBuilder.homeScreenNavGraph(
 
         composable(route = HomeScreens.AddScreen.route) {
 
-            AddScreen( popUp = { appState.popUp() } )
+            AddScreen(
+                openAndPopUp = { route, popup ->
+                    appState.navigateAndPopUp(route, popup)
+                }
+            )
         }
 
         composable(route = HomeScreens.ProfileScreen.route) {
 
-            ProfileScreen()
+            ProfileScreen(clearAndOpen = { appState.clearAndNavigate(it) })
         }
 
         composable(route = HomeScreens.HomeDetailScreen.route) {

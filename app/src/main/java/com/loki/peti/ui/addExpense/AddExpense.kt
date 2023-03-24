@@ -14,14 +14,17 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dsc.form_builder.TextFieldState
+import com.loki.peti.domain.models.HomeDetail
 import com.loki.peti.ui.common.*
+import com.loki.peti.ui.tabs.HomeDetailTabsViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AddExpenseScreen(
     topBarTitle: String,
     popUp: () -> Unit,
-    viewModel: AddExpenseViewModel = hiltViewModel()
+    viewModel: AddExpenseViewModel = hiltViewModel(),
+    detailTabsViewModel: HomeDetailTabsViewModel = hiltViewModel()
 ) {
 
     val context = LocalContext.current
@@ -88,6 +91,13 @@ fun AddExpenseScreen(
                     modifier = Modifier.padding(vertical = 16.dp)
                 ) {
                     if (formState.validate()) {
+                        detailTabsViewModel.addExpense(
+                            HomeDetail(
+                                titleDescription = itemName.value,
+                                expenseAmount = amount.value.toDouble(),
+                                dateRecord = date.value
+                            )
+                        )
                         popUp()
                         keyboardController?.hide()
                     }

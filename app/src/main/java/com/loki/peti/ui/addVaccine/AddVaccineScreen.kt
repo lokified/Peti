@@ -15,14 +15,17 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dsc.form_builder.TextFieldState
+import com.loki.peti.domain.models.HomeDetail
 import com.loki.peti.ui.common.*
+import com.loki.peti.ui.tabs.HomeDetailTabsViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AddVaccineScreen(
     topBarTitle: String,
     popUp: () -> Unit,
-    viewModel: AddVaccineViewModel = hiltViewModel()
+    viewModel: AddVaccineViewModel = hiltViewModel(),
+    detailTabsViewModel: HomeDetailTabsViewModel = hiltViewModel()
 ) {
 
     val context = LocalContext.current
@@ -84,6 +87,13 @@ fun AddVaccineScreen(
                     isIconVisible = true,
                     trailingIcon = Icons.Rounded.DateRange,
                     onIconClicked = {
+                        detailTabsViewModel.addVaccine(
+                            HomeDetail(
+                                titleDescription = vaccineType.value,
+                                timeRecord = time.value,
+                                dateRecord = date.value
+                            )
+                        )
                         datePicker.show()
                         keyboardController?.hide()
                     }

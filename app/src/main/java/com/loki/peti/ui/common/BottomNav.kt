@@ -1,8 +1,10 @@
 package com.loki.peti.ui.common
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.AddCircle
 import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material.icons.rounded.AddCircle
 import androidx.compose.material.icons.rounded.Home
@@ -46,8 +48,8 @@ fun BottomNav(
                             imageVector = bottomNavItem.icon,
                             contentDescription = null,
                             modifier = Modifier.size(
-                                if (bottomNavItem.icon == Icons.Rounded.AddCircle) 35.dp else 25.dp
-                            ).alpha(1f)
+                                if (bottomNavItem.icon == Icons.Outlined.AddCircle) 35.dp else 25.dp
+                            )
                         )
                     },
                     label = {
@@ -75,7 +77,7 @@ val navItems = listOf(
         route = HomeScreens.HomeScreen.route
     ),
     BottomNavItem(
-        icon = Icons.Rounded.AddCircle,
+        icon = Icons.Outlined.AddCircle,
         navTitle = "",
         route = HomeScreens.AddScreen.route
     ),

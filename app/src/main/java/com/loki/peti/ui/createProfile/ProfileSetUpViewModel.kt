@@ -1,6 +1,7 @@
 package com.loki.peti.ui.createProfile
 
 import android.graphics.Bitmap
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import com.dsc.form_builder.FormState
 import com.dsc.form_builder.TextFieldState
@@ -19,7 +20,7 @@ class ProfileSetUpViewModel @Inject constructor(
 
     var imageBitmap = mutableStateOf<Bitmap?>(null)
 
-    val feedingList = mutableListOf<String>()
+    val feedingList = mutableStateListOf<String>()
 
     val feedTime = mutableStateOf("")
 

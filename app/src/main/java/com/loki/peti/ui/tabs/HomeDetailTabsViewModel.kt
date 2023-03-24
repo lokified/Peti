@@ -1,11 +1,12 @@
 package com.loki.peti.ui.tabs
 
+import androidx.compose.runtime.mutableStateListOf
 import com.loki.peti.domain.models.HomeDetail
 import com.loki.peti.ui.PetiAppViewModel
 
 class HomeDetailTabsViewModel: PetiAppViewModel() {
 
-    private val hygieneDetails = mutableListOf(
+    private val hygieneDetails = mutableStateListOf(
         HomeDetail(
             titleDescription = "Washed the cat today",
             timeRecord = "12:00 PM"
@@ -16,7 +17,7 @@ class HomeDetailTabsViewModel: PetiAppViewModel() {
         hygieneDetails.add(hygieneDetail)
     }
 
-    private val vaccineDetails = mutableListOf(
+    private val vaccineDetails = mutableStateListOf(
         HomeDetail(
             titleDescription = "Rabies Vaccine",
             timeRecord = "05:00 PM",
@@ -44,7 +45,7 @@ class HomeDetailTabsViewModel: PetiAppViewModel() {
         foodDetails.add(foodDetail)
     }
 
-    private val activitiesRecord = mutableListOf(
+    private val activitiesRecord = mutableStateListOf(
         HomeDetail(
             titleDescription = "Exercises",
             startTime = "06:00 AM",
@@ -66,7 +67,7 @@ class HomeDetailTabsViewModel: PetiAppViewModel() {
         activitiesRecord.add(activityDetail)
     }
 
-    private val expenseRecords = mutableListOf(
+    private val expenseRecords = mutableStateListOf(
         HomeDetail(
             titleDescription = "Bought Fish",
             expenseAmount = 2.00
@@ -84,7 +85,7 @@ class HomeDetailTabsViewModel: PetiAppViewModel() {
             "Vaccine" -> vaccineDetails
             "Activities" -> activitiesRecord
             "Food" -> foodDetails
-            "Hygiene And Care" -> hygieneDetails
+            "Hygiene and Care" -> hygieneDetails
             "Expense" -> expenseRecords
             else -> emptyList()
         }

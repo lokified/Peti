@@ -15,14 +15,17 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dsc.form_builder.TextFieldState
+import com.loki.peti.domain.models.HomeDetail
 import com.loki.peti.ui.common.*
+import com.loki.peti.ui.tabs.HomeDetailTabsViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AddActivitiesScreen(
     topBarTitle: String,
     popUp: () -> Unit,
-    viewModel: AddActivitiesViewModel = hiltViewModel()
+    viewModel: AddActivitiesViewModel = hiltViewModel(),
+    detailTabsViewModel: HomeDetailTabsViewModel = hiltViewModel()
 ) {
 
     val context = LocalContext.current
@@ -115,6 +118,14 @@ fun AddActivitiesScreen(
                     modifier = Modifier.padding(vertical = 16.dp)
                 ) {
                     if (formState.validate()) {
+                        detailTabsViewModel.addActivities(
+                            HomeDetail(
+                                titleDescription = activityType.value,
+                                startTime = startTime.value,
+                                endTime = endTime.value,
+                                dateRecord = date.value
+                            )
+                        )
                         popUp()
                         keyboardController?.hide()
                     }

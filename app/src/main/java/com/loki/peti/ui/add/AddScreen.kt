@@ -14,7 +14,7 @@ import com.loki.peti.ui.common.TransparentInput
 
 @Composable
 fun AddScreen(
-    popUp: () -> Unit,
+    openAndPopUp: (String, String) -> Unit,
     viewModel: AddCategoryViewModel = hiltViewModel()
 ) {
 
@@ -22,13 +22,23 @@ fun AddScreen(
     val title = formState.getState<TextFieldState>("title")
 
 
-    TopBar(title = "Add Category") {
+    TopBar(
+        title = "Add Category",
+        trailingText = "Save",
+        onTrailingTextClick = {
+            if (formState.validate()) {
+                viewModel.saveCategory(
+                    title = title.value,
+                    openAndPopUp = openAndPopUp
+                )
+            }
+        }
+    ) {
 
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(vertical = 24.dp, horizontal = 16.dp),
-            contentAlignment = Alignment.Center
         ) {
 
             Column {
@@ -41,11 +51,7 @@ fun AddScreen(
                     isError = title.hasError
                 )
 
-                Spacer(modifier = Modifier.weight(1f))
-
-                ButtonSection(text = "Save") {
-                    popUp()
-                }
+                Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }
